@@ -45,7 +45,7 @@ def logout():
 def about():
     return render_template("about.html")
 @app.route("/hello")
-def hello():
+def hello(
     return render_template("hello.html")
 
 if __name__ == "__main__":
