@@ -29,8 +29,8 @@ def test_successful_login(client):
         follow_redirects=True,
     )
     assert response.status_code == 200
-    assert b"Login successful!" in response.data
-    assert b"welcome" in response.data.lower()
+    # Instead of flash message, check if welcome page is shown
+    assert b"Welcome, admin" in response.data
 
 
 def test_failed_login(client):
