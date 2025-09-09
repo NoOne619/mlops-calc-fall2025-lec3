@@ -25,11 +25,18 @@ jobs:
 
       - name: Run tests
         run: pytest
-
+      - name: Run flake8 (Linting)
+        run: |
+          # Fail on syntax errors or undefined names
+          flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+          # Warn about style issues but don’t fail build
+          flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+ 
       - name: Deploy to Azure WebApp
         uses: azure/webapps-deploy@v2
         with:
           app-name: mlops-calc-fall202   # Replace with your Azure Web App name
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
           package: .
+
 
